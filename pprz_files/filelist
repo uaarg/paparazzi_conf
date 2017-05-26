@@ -1,0 +1,6 @@
+dir waldo_msg /sw/airborne/modules/
+dir flight_trim /sw/airborne/modules/
+dir mission /sw/airborne/modules/
+merge imu_aspirin_2_spi.c /sw/airborne/subsystems/imu/
+merge radio_control.h /sw/airborne/subsystems/
+merge spektrum_arch.c /sw/airborne/arch/stm32/subsystems/radio_control/

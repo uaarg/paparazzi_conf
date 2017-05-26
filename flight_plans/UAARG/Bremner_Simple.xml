@@ -1,0 +1,86 @@
+<!DOCTYPE flight_plan SYSTEM "../flight_plan.dtd">
+
+<flight_plan alt="710" ground_alt="605" lat0="53.63836" lon0="-113.28607" max_dist_from_home="1000" name="Bremner_Simple" qfu="270" security_height="25">
+  <header>
+
+</header>
+  <waypoints>
+    <waypoint name="STDBY" x="30." y="100."/>
+    <waypoint name="1" x="100.1" y="70.9"/>
+    <waypoint name="2" x="-100.3" y="80.1"/>
+    <waypoint name="CLIMB" x="-125.0" y="45.0"/>
+    <waypoint name="MOB" x="-11.5" y="-21.2"/>
+
+    <waypoint name="_oparea1" lon="-113.293441" lat="53.63836"/>
+    <waypoint name="_oparea2" lon="-113.286206" lat="53.638365"/>
+    <waypoint name="_oparea3" lon="-113.2861876" lat="53.6377939"/>
+    <waypoint name="_oparea4" lon="-113.2825398" lat="53.6377812"/>
+    <waypoint name="_oparea5" lon="-113.2805228" lat="53.6418266"/>
+    <waypoint name="_oparea6" lon="-113.280481" lat="53.64273800"/>
+    <waypoint name="_oparea7" lon="-113.2871103" lat="53.6427425"/>
+    <waypoint name="_oparea8" lon="-113.2896423" lat="53.6409743"/>
+    <waypoint name="_oparea9" lon="-113.293346" lat="53.639791"/>
+    <waypoint name="_oparea10" lon="-113.293441" lat="53.63836"/>
+  </waypoints>
+
+  <sectors>
+    <sector color="red" name="Operation_Area">
+      <corner name="_oparea1"/>
+      <corner name="_oparea2"/>
+      <corner name="_oparea3"/>
+      <corner name="_oparea4"/>
+      <corner name="_oparea5"/>
+      <corner name="_oparea6"/>
+      <corner name="_oparea7"/>
+      <corner name="_oparea8"/>
+      <corner name="_oparea9"/>
+      <corner name="_oparea10"/>
+    </sector>
+  </sectors>
+
+
+  <includes>
+    <include name="Failsafe" procedure="failsafe_comp.xml">
+      <with from="Standby" to="Standby"/>
+    </include>
+    <include name="Tuning" procedure="tuning.xml"/>
+    <include name="Testing" procedure="testing.xml">
+      <with from="Standby" to="Standby"/>
+    </include>
+  </includes>
+  <blocks>
+    <block name="Wait GPS">
+      <while cond="!GpsFixValid()"/>
+      <set value="1" var="kill_throttle"/>
+    </block>
+    <block name="Geo init">
+      <while cond="LessThan(NavBlockTime(), 10)"/>
+      <call fun="NavSetGroundReferenceHere()"/>
+    </block>
+    <block name="Holding point">
+      <set value="1" var="kill_throttle"/>
+      <attitude roll="0" throttle="0" vmode="throttle"/>
+    </block>
+     <block name="Takeoff" strip_icon="takeoff.png" strip_button="Takeoff (wp CLIMB)">
+      <exception cond="GetPosAlt() > GetAltRef()+50" deroute="Standby"/>
+      <set value="0" var="kill_throttle"/>
+      <attitude roll="0" pitch="25" vmode="throttle" throttle="1.00"/>
+    </block>
+    <block name="Standby" strip_button="Standby" strip_icon="home.png">
+      <circle radius="nav_radius" wp="STDBY"/>
+    </block>
+    <block name="MOB" strip_button="Circle around here" strip_icon="mob.png">
+      <call fun="NavSetWaypointHere(WP_MOB)"/>
+      <circle radius="100" wp="MOB"/>
+    </block>
+
+    <block name="Figure 8 around here" strip_button="Figure 8 Here" strip_icon="eight.png">
+	<call fun="NavSetWaypointHere(WP_MOB)"/>
+	<eight center="MOB" radius="nav_radius" turn_around="2"/>
+    </block>
+
+    <block name="WP1">
+      <circle radius="nav_radius" wp="1"/>
+    </block>
+  </blocks>
+</flight_plan>

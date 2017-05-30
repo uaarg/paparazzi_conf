@@ -72,8 +72,11 @@
     <module name="mission_fw.xml"/>
 
 
-    <define name="RC_LOST_MODE" value="PPRZ_MODE_AUTO2"/>
-    <define name="AGR_CLIMB"/>
+  <define name="AGR_CLIMB"/>
+  <define name="WIND_INFO"/>
+  <define name="WIND_INFO_RET"/>
+  <define name="STRONG_WIND"/>
+
     <define name="LOITER_TRIM"/>
 
     <configure name="NO_LUFTBOOT" value="1"/>
@@ -165,23 +168,24 @@
     <!--Note a module that automatically updates this value has been added, see below. (geo_mag.xml)-->
 
 <!-- Local magnetic field vector Bremner Field-->
-<!--
+<!---->
     <define name="H_X" value="0.259"/>
     <define name="H_Y" value="0.045"/>
     <define name="H_Z" value="0.927124"/>
--->
-<!-- club room-->
+
+<!-- club room
     <define name="H_X" value=".523"/>
     <define name="H_Y" value=".256"/>
     <define name="H_Z" value="0.953"/>
+    -->
   </section>
 
 
   <section name="BAT">
     <define name="MILLIAMP_AT_FULL_THROTTLE" value="20000"/>
     <define name="CATASTROPHIC_BAT_LEVEL" value="12.7" unit="V"/>
-    <define name="CRITIC_BAT_LEVEL" value="14.7" unit="V"/>
-    <define name="LOW_BAT_LEVEL" value="15.1" unit="V"/>
+    <define name="CRITIC_BAT_LEVEL" value="14.3" unit="V"/>
+    <define name="LOW_BAT_LEVEL" value="14.8" unit="V"/>
     <define name="MAX_BAT_LEVEL" value="16.8" unit="V"/>
     <define name="VOLTAGE_ADC_SCALE" value=".004068231"/>
     <define name="VOLTAGE_ADC_OFFSET" value=".141054"/>
@@ -192,7 +196,7 @@
   <section name="MISC">
     <!--define name="CLIMB_AIRSPEED" value="12." unit="m/s"/ notin us comp-->
     <define name="NOMINAL_AIRSPEED" value="15." unit="m/s"/>
-    <define name="CARROT" value="4." unit="s"/> <!-- hen carrot time away from waypoint in go and path, Paparazzi determines it has reached the waypoint-->
+    <define name="CARROT" value="2." unit="s"/> <!-- hen carrot time away from waypoint in go and path, Paparazzi determines it has reached the waypoint-->
     <define name="KILL_MODE_DISTANCE" value="(2.0*MAX_DIST_FROM_HOME)"/>
     <define name="DEFAULT_CIRCLE_RADIUS" value="60."/>
 

@@ -620,6 +620,7 @@
     <message name="MISSION_STATUS" id="79">
       <field name="remaining_time" type="float"/>
       <field name="index_list" type="uint8[]"/>
+      <field name="task_array" type="uint8[]"/>
     </message>
 
     <!-- 80 is free -->

@@ -10,7 +10,7 @@
     <waypoint name="2" x="-100.3" y="80.1"/>
     <waypoint name="CLIMB" x="-125.0" y="45.0"/>
     <waypoint name="MOB" x="-11.5" y="-21.2"/>
-    <waypoint name="LKN" x="100" y="100"/>
+    <waypoint name="LKN" x="100" y="50"/>
     <waypoint name="preLanding" x="191.5" y="72.6" height="45"/>
     <waypoint name="preLanding1" x="161.4" y="-182.3" height="25"/>
     <waypoint name="preLanding2" x="20" y="-176.9" height="17"/>
@@ -139,6 +139,10 @@
         <path approaching_time="3" wpts="r2, r3"/>
         <path approaching_time="3" wpts="r3, r4"/>
      </while>
+    </block>
+    <block name="Mission" strip_button="Mission">
+      <call fun="mission_run()"/>
+      <deroute block="Standby"/>
     </block>
   </blocks>
 </flight_plan>

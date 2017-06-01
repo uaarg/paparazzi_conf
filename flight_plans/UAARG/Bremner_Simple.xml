@@ -10,11 +10,12 @@
     <waypoint name="2" x="-100.3" y="80.1"/>
     <waypoint name="CLIMB" x="-125.0" y="45.0"/>
     <waypoint name="MOB" x="-11.5" y="-21.2"/>
+    <waypoint name="LKN" x="100" y="100"/>
     <waypoint name="preLanding" x="191.5" y="72.6" height="45"/>
     <waypoint name="preLanding1" x="161.4" y="-182.3" height="25"/>
-    <waypoint name="preLanding2" x="25.8" y="-176.9" height="17"/>
-    <waypoint name="preLanding3" x="20.8" y="-120.9" height="9"/>
-    <waypoint name="preLanding4" x="20.8" y="-50.4" height="3"/>
+    <waypoint name="preLanding2" x="20" y="-176.9" height="17"/>
+    <waypoint name="preLanding3" x="20" y="-120.9" height="9"/>
+    <waypoint name="preLanding4" x="20" y="-50.4" height="3"/>
     <waypoint name="Landing" x="20.8" y="87.2" height="0"/>
     <waypoint name="r1" x="257.2" y="259.0"/>
     <waypoint name="r2" x="120.0" y="82.8"/>
@@ -68,7 +69,7 @@
       <attitude roll="0" throttle="0" vmode="throttle"/>
     </block>
     <block name="Takeoff" strip_button="Takeoff (wp CLIMB)" strip_icon="takeoff.png">
-      <exception cond="GetPosAlt() > GetAltRef()+50" deroute="Standby"/>
+      <exception cond="GetPosAlt() > GetAltRef()+50" deroute="preStandby"/>
       <set value="0" var="autopilot.kill_throttle"/>
       <attitude pitch="25" roll="0" throttle="1.00" vmode="throttle"/>
     </block>
@@ -79,6 +80,10 @@
     </block>
     <block name="Standby" strip_button="Standby" strip_icon="home.png">
       <circle radius="nav_radius" wp="STDBY"/>
+    </block>
+    <block name="Mission" strip_button="Mission">
+      <call fun="mission_run()"/>
+      <deroute block="Standby"/>
     </block>
     <block name="MOB" strip_button="Circle around here" strip_icon="mob.png">
       <call fun="NavSetWaypointHere(WP_MOB)"/>

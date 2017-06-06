@@ -211,4 +211,11 @@
 
   <include href="conf/airframes/UAARG/EPP_FPV_TUNING_AIRSPEED.xml"/>
 <!-- End Autopilot Tuning Sections -->
+
+  <section name="GCS">
+    <define name="AC_ICON" value="flyingwing"/>
+    <define name="CAM_HFV" value="58.4"/>
+    <define name="CAM_VFV" value="48.2"/>
+  </section>
+
 </airframe>

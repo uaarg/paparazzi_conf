@@ -84,9 +84,39 @@
        <arg flag="-s" constant="57600"/>
      </program>
      <program name="Server"/>
-     <program name="GCS"/>
+     <program name="Settings">
+        <arg flag="-ac" constant="@AIRCRAFT"/>
+        <arg flag="-g" constant="800x200+0-0"/>
+      </program>
+     <program name="GCS">
+        <arg flag="-layout" constant="uaarg_map.xml"/>
+     </program>
      <program name="Messages"/>
-     <program name="Mission Commander"/>
+   </session>
+
+   <session name="2 Screen GCS">
+     <program name="Settings">
+        <arg flag="-ac" constant="@AIRCRAFT"/>
+        <arg flag="-g" constant="800x200+0-0"/>
+      </program>
+     <program name="GCS">
+        <arg flag="-layout" constant="uaarg_map.xml"/>
+     </program>
+   </session>
+
+
+   <session name="Tune Airspeed">
+      <program name="Real-time Plotter">
+        <arg flag="-g" constant="1000x250-0+0"/>
+        <arg flag="-t" constant="Airspeed"/>
+        <arg flag="-c" constant="*:telemetry:AIRSPEED:airspeed:1"/>
+        <arg flag="-c" constant="*:telemetry:DESIRED:airspeed:1"/>
+        <arg flag="-n"/>
+        <arg flag="-g" constant="1000x250-0+250"/>
+        <arg flag="-t" constant="Climb"/>
+        <arg flag="-c" constant="*:telemetry:ESTIMATOR:z_dot:1"/>
+        <arg flag="-c" constant="*:telemetry:DESIRED:climb:1"/>
+      </program>
    </session>
 
    <session name="Flight UDP/WiFi">

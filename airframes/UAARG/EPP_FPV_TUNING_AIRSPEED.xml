@@ -36,7 +36,7 @@
 
 
   <section name="VERTICAL CONTROL" prefix="V_CTL_">
-  
+
     <define name="POWER_CTL_BAT_NOMINAL" value="14.7" unit="volt"/>
     <!-- outer loop proportional gain -->
     <define name="ALTITUDE_PGAIN" value="0.09"/>
@@ -51,19 +51,19 @@
     <define name="AUTO_PITCH_MIN_PITCH" value="-RadOfDeg(20.)"/>
 
     <!-- Climb loop (throttle) -->
-    
-    <define name="AUTO_THROTTLE_CLIMB_THROTTLE_INCREMENT" value="0.04" unit="%/(m/s)"/>
-    <define name="AUTO_THROTTLE_PGAIN" value="0.002"/> 
-    <define name="AUTO_THROTTLE_DGAIN" value="0.0"/> 
-    <define name="AUTO_THROTTLE_IGAIN" value="0.0"/>
+
+    <define name="AUTO_THROTTLE_CLIMB_THROTTLE_INCREMENT" value="0.05" unit="%/(m/s)"/> <!-- 0.04 -->
+    <define name="AUTO_THROTTLE_PGAIN" value="0.001"/> <!-- 0.002 -->
+    <define name="AUTO_THROTTLE_DGAIN" value="0.0"/> <!-- 0.0 -->
+    <define name="AUTO_THROTTLE_IGAIN" value="0.003"/> <!-- 0.00 --> 
     <define name="AUTO_THROTTLE_LOITER_TRIM" value="1500"/>
     <define name="AUTO_THROTTLE_DASH_TRIM" value="-4000"/>
 
 
     <!-- Climb loop (pitch) -->
     <define name="AUTO_THROTTLE_PITCH_OF_VZ_PGAIN" value="0.09"/>
-    <define name="AUTO_PITCH_PGAIN" value="0.035"/> <!-- 0.04 -->
-    <define name="AUTO_PITCH_DGAIN" value="0.0"/> <!-- 0.04 -->
+    <define name="AUTO_PITCH_PGAIN" value="0.044"/> <!-- saved as 0.035, tuned to 0.044, perhaps also 0.04 -->
+    <define name="AUTO_PITCH_DGAIN" value="0.04"/> <!-- 0.00 -->
     <define name="AUTO_PITCH_IGAIN" value="0.0"/>
 
     <!-- airspeed control -->
@@ -87,7 +87,7 @@
     <define name="PITCH_DASH_TRIM" value="RadOfDeg(-0.)"/>
 
     <define name="THROTTLE_SLEW" value="0.1"/>
-    
+
   </section>
 
   <section NAME="NAV">

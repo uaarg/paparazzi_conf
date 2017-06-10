@@ -354,8 +354,8 @@
     </message>
 
     <message name="ESTIMATOR" id="42">
-      <field name="z" type="float" unit="m" alt_unit="ft" alt_unit_coef="3.2808399"/>
-      <field name="z_dot" type="float" unit="m/s" alt_unit="ft/s" alt_unit_coef="3.2808399"/>
+      <field name="z" type="float" unit="m"/>
+      <field name="z_dot" type="float" unit="m/s"/>
     </message>
 
     <message name="TUNE_ROLL" id="43">
@@ -420,7 +420,7 @@
     </message>
 
     <message name="AIRSPEED" id="54">
-      <field name="airspeed" type="float" unit="m/s" alt_unit="knots" alt_unit_coef="1.93438449"/>
+      <field name="airspeed" type="float" unit="m/s"/>
       <field name="airspeed_sp" type="float" unit="m/s"/>
       <field name="airspeed_cnt" type="float" unit="m/s"/>
       <field name="groundspeed_sp" type="float" unit="m/s"/>

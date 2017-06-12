@@ -7,7 +7,7 @@
 
     <target name="ap" board="lisa_mx_2.1">
      <module name="ins" type="alt_float">
-       <define name="USE_BAROMETER" value="TRUE"/>
+       <define name="USE_BAROMETER" value="False"/>
      </module>
       <define name="LISA_FALCON"/>
       <define name="USE_ADC"/>
@@ -200,7 +200,7 @@
     <define name="KILL_MODE_DISTANCE" value="(2.0*MAX_DIST_FROM_HOME)"/>
     <define name="DEFAULT_CIRCLE_RADIUS" value="60."/>
 
-    <define name="COMMAND_ROLL_TRIM" value="0."/>
+    <define name="COMMAND_ROLL_TRIM" value="960."/>
     <define name="COMMAND_PITCH_TRIM" value="0."/>
     <define name="COMMAND_YAW_TRIM" value="0."/>
 

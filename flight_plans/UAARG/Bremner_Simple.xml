@@ -11,11 +11,14 @@
     <waypoint name="CLIMB" x="-125.0" y="45.0"/>
     <waypoint name="MOB" x="-11.5" y="-21.2"/>
     <waypoint name="LKN" x="100" y="50"/>
+    <waypoint name="bOAX" x="200" y="200"/>
+    <waypoint name="OAX" x="200" y="200"/>
+    <waypoint name="aOAX" x="200" y="200"/>
     <!-- Landing Waypoints NEEDED FOR AUTO LANDING -->
-    <waypoint name="preLanding" x="191.5" y="72.6" height="45"/>
+    <waypoint name="preLanding" x="191.5" y="72.6" height="25"/>
     <waypoint name="preLanding1" x="161.4" y="-182.3" height="25"/>
-    <waypoint name="preLanding2" x="20" y="-176.9" height="17"/>
-    <waypoint name="preLanding3" x="20" y="-120.9" height="9"/>
+    <waypoint name="preLanding2" x="20" y="-176.9" height="15"/>
+    <waypoint name="preLanding3" x="20" y="-120.9" height="6"/>
     <waypoint name="preLanding4" x="20" y="-50.4" height="3"/>
     <waypoint name="Landing" x="20.8" y="87.2" height="0"/>
     <!-- Autonamous Navigation Waypoints -->
@@ -62,7 +65,7 @@
 
   </waypoints>
   <sectors>
-    <sector color="red" name="Operation_Area">
+    <sector color="red" name="Operation_Area" type="dynamic">
       <corner name="_oparea1"/>
       <corner name="_oparea2"/>
       <corner name="_oparea3"/>
@@ -132,6 +135,20 @@
       <call fun="mission_run()"/>
       <deroute block="Standby"/>
     </block>
+
+    <block name="OAX Rising Circle">
+      <go wp="bOAX"/>
+      <circle height="60+ 00 + 40" radius="nav_radius" until="stage_time > 43" wp="OAX"/>
+      <while cond="TRUE">
+        <circle radius="nav_radius" until="stage_time > 2*43" wp="OAX"/>
+      </while>
+      <deroute block="Go aOAX"/>
+    </block>
+    <block name="Go aOAX">
+      <go wp="aOAX"/>
+      <deroute block="Standby"/>
+    </block>
+
     <block name="MOB" strip_button="Circle around here" strip_icon="mob.png">
       <call fun="NavSetWaypointHere(WP_MOB)"/>
       <circle radius="100" wp="MOB"/>
@@ -144,7 +161,7 @@
       <circle radius="nav_radius" wp="one"/>
     </block>
     <block name="InitAutoLanding">
-      <exception cond="GetAltRef()+50 > GetPosAlt()" deroute="preLanding1"/>
+      <exception cond="GetAltRef()+25 > GetPosAlt()" deroute="preLanding1"/>
       <circle radius="nav_radius" wp="preLanding"/>
     </block>
     <block name="preLanding1">
@@ -165,6 +182,10 @@
     </block>
     <block name="finalApproach">
       <attitude pitch="4" roll="0" throttle="0.10" vmode="throttle"/>
+      <deroute block="Stopped"/>
+    </block>
+    <block name="Aggresive finalApproach">
+      <attitude pitch="-2" roll="0" throttle="0.0" vmode="throttle"/>
       <deroute block="Stopped"/>
     </block>
     <block name="Stopped">

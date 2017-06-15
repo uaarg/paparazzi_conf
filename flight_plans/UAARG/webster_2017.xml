@@ -1,6 +1,7 @@
 <!DOCTYPE flight_plan SYSTEM "../flight_plan.dtd">
 
-<flight_plan alt="87" ground_alt="12" lat0="38.1449296" lon0="-76.4278886" max_dist_from_home="950" name="Webster_2016" qfu="270" security_height="25">
+<flight_plan alt="87" ground_alt="4" lat0="38.1449296" lon0="-76.4278886" max_dist_from_home="950" name="Webster_2016" qfu="270" security_height="25">
+<!-- Previeous plan had ground_alt="12" -->
   <header>
 #include "subsystems/datalink/datalink.h"
 </header>
@@ -48,19 +49,19 @@
     <waypoint height="50" name="swp2" x="-377.8" y="-409.4"/>
     <waypoint height="50" name="swp3" x="130.8" y="-384.2"/>
     <waypoint height="50" name="swp4" x="303.7" y="-310.2"/>
-    <waypoint height="50" name="swp5" x="383.4" y="-269.8"/>
-    <waypoint height="50" name="swp6" x="-73.7" y="-415.6"/>
-    <waypoint height="50.0" name="swp7" x="4.0" y="-351.3"/>
+    <waypoint height="50" name="swp5" x="400.0" y="-230.0"/>
+    <waypoint height="50" name="swp6" x="-90.0" y="-390.0"/>
+    <waypoint height="50.0" name="swp7" x="4.0" y="-330.0"/>
     <waypoint height="50.0" name="swp8" x="504.5" y="-108.5"/>
-    <waypoint height="50.0" name="swp9" x="432.7" y="-73.9"/>
+    <waypoint height="50.0" name="swp9" x="432.7" y="-60.0"/>
     <waypoint height="50" name="swp10" x="-408.6" y="-402.0"/>
-    <waypoint height="50.0" name="swp11" x="-262.2" y="-327.0"/>
-    <waypoint height="50.0" name="swp12" x="459.8" y="4.8"/>
-    <waypoint height="50" name="swp13" x="383.3" y="22.9"/>
+    <waypoint height="50.0" name="swp11" x="-215.0" y="-325.0"/>
+    <waypoint height="50.0" name="swp12" x="459.8" y="-20.0"/>
+    <waypoint height="50" name="swp13" x="383.3" y="15.0"/>
     <waypoint height="50" name="swp14" x="-454.8" y="-308.4"/>
-    <waypoint height="50"  name="swp15" x="-317.8" y="-212.1"/>
-    <waypoint height="50" name="swp16" x="406.4" y="111.4"/>
-    <waypoint height="50" name="swp17" x="302.2" y="111.2"/>
+    <waypoint height="50"  name="swp15" x="-280.0" y="-230.0"/>
+    <waypoint height="50" name="swp16" x="406.4" y="75.0"/>
+    <waypoint height="50" name="swp17" x="302.2" y="125.0"/>
     <waypoint height="50" name="swp18" x="-519.5" y="-211.6"/>
     <waypoint height="50" name="bLKN" x="570.9" y="99.1"/>
     <waypoint height="50" name="LKN" x="590.9" y="50.1"/>
@@ -141,11 +142,11 @@
       <go wp="swp9"/>
       <go wp="swp10"/>
       <go wp="swp11"/>
-      <go wp="swp12"/>
+      <path wpts="swp11, swp12"/>
       <go wp="swp13"/>
       <go wp="swp14"/>
       <go wp="swp15"/>
-      <go wp="swp16"/>
+      <path wpts="swp15, swp16"/>
       <go wp="swp17"/>
       <go wp="swp18"/>
       <deroute block="Standby"/>
@@ -178,6 +179,38 @@
     <block name="Go aOAX">
       <go wp="aOAX"/>
       <deroute block="Standby"/>
+    </block>
+    <block name="InitAutoLanding">
+      <exception cond="GetAltRef()+25 > GetPosAlt()" deroute="preLanding1"/>
+      <circle radius="nav_radius" wp="preLanding"/>
+    </block>
+    <block name="preLanding1">
+      <go  wp="preLanding1"/>
+      <deroute block="preLanding2"/>
+    </block>
+    <block name="preLanding2">
+      <go wp="preLanding2"/>
+      <deroute block="preLanding3"/>
+    </block>
+    <block name="preLanding3">
+      <go wp="preLanding3"/>
+      <deroute block="preLanding4"/>
+    </block>
+    <block name="preLanding4">
+      <go wp="preLanding4"/>
+      <deroute block="finalApproach"/>
+    </block>
+    <block name="finalApproach">
+      <attitude pitch="4" roll="0" throttle="0.10" vmode="throttle"/>
+      <deroute block="Stopped"/>
+    </block>
+    <block name="Aggresive finalApproach">
+      <attitude pitch="-2" roll="0" throttle="0.0" vmode="throttle"/>
+      <deroute block="Stopped"/>
+    </block>
+    <block name="Stopped">
+      <set value="1" var="autopilot.kill_throttle"/>
+      <attitude pitch="0" roll="0" throttle="0.00" vmode="throttle"/>
     </block>
     <block name="SRIC">
       <go wp="SRIC"/>
@@ -274,6 +307,10 @@
     <block name="Go swp18">
       <go wp="swp18"/>
       <deroute block="Standby"/>
+    </block>
+    <block name="Check Failsafe">
+      <set value="0" var="autopilot.kill_throttle"/>
+      <attitude pitch="0" roll="0" throttle="0.10" vmode="throttle"/>
     </block>
   </blocks>
 </flight_plan>
